@@ -18,9 +18,8 @@ export class Perfil extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
-  descripcion: string;
+  descripcion?: string;
 
   @property({
     type: 'string',

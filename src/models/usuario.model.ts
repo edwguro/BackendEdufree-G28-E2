@@ -43,9 +43,10 @@ export class Usuario extends Entity {
   codigo: string;
 
   @property({
-    type: 'object',
+    type: 'string',
+    required: true,
   })
-  calificaciones?: object;
+  tipo: string;
 
   @belongsTo(() => Perfil)
   perfilId: string;

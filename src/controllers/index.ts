@@ -3,7 +3,6 @@ export * from './asignatura-programa-academico.controller';
 export * from './programa-academico-asignatura.controller';
 export * from './grupo-asignatura.controller';
 export * from './asignatura-grupo.controller';
-export * from './usuario-perfil.controller';
 export * from './perfil-usuario.controller';
 export * from './usuario-grupo.controller';
 export * from './notificaciones-usuario.controller';

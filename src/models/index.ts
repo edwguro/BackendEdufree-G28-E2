@@ -6,3 +6,4 @@ export * from './perfil.model';
 export * from './notificaciones.model';
 export * from './notificaciones-por-usuario.model';
 export * from './usuario-por-grupo.model';
+export * from './credenciales.model';

@@ -1,7 +1,7 @@
 {
-  "name": "edufree",
+  "name": "start",
   "version": "0.0.1",
-  "description": "Aplicacion para administracion academica.",
+  "description": "start",
   "keywords": [
     "loopback-application",
     "loopback"
@@ -25,8 +25,8 @@
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
-    "docker:build": "docker build -t edufree .",
-    "docker:run": "docker run -p 3000:3000 -d edufree",
+    "docker:build": "docker build -t start .",
+    "docker:run": "docker run -p 3000:3000 -d start",
     "premigrate": "npm run build",
     "migrate": "node ./dist/migrate",
     "preopenapi-spec": "npm run build",
@@ -49,17 +49,12 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/authentication": "^7.3.4",
     "@loopback/boot": "^3.4.4",
     "@loopback/core": "^2.18.0",
     "@loopback/repository": "^3.7.3",
     "@loopback/rest": "^10.1.0",
     "@loopback/rest-explorer": "^3.3.4",
-    "@loopback/security": "^0.5.4",
     "@loopback/service-proxy": "^3.2.4",
-    "jsonwebtoken": "^8.5.1",
-    "loopback-connector-mongodb": "^5.6.0",
-    "parse-bearer-token": "^1.0.1",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

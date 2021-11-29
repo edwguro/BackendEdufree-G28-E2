@@ -1,3 +1,5 @@
+import { authenticate } from '@loopback/authentication';
+import { service } from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -16,15 +18,48 @@ import {
   del,
   requestBody,
   response,
+  HttpErrors,
 } from '@loopback/rest';
-import {Usuario} from '../models';
+import {Credenciales, Usuario} from '../models';
 import {UsuarioRepository} from '../repositories';
+import { SeguridadService } from '../services';
 
 export class UsuarioController {
   constructor(
     @repository(UsuarioRepository)
     public usuarioRepository : UsuarioRepository,
+
+    @service(SeguridadService) public servicioSeguridad: SeguridadService
   ) {}
+
+  @post('/login', {
+    responses: {
+      '200': {
+        description: 'ok'
+      }
+    }
+  })
+  async login(@requestBody() credenciales: Credenciales){
+
+    let usuarioEncontrado = await this.servicioSeguridad.validarUsuario(credenciales);
+      
+     if(usuarioEncontrado){
+       const token= await this.servicioSeguridad.GenerarToken(usuarioEncontrado);
+       if(token){
+        return{
+          data: usuarioEncontrado,
+          tk: token
+        }
+       }else{
+        throw new HttpErrors[401]('Datos invalidos');
+       }
+      
+
+     }else{
+          throw new HttpErrors[401]('Datos invalidos');
+     }
+
+  }
 
   @post('/usuarios')
   @response(200, {
@@ -46,7 +81,7 @@ export class UsuarioController {
   ): Promise<Usuario> {
     return this.usuarioRepository.create(usuario);
   }
-
+  //@authenticate('seguridad')
   @get('/usuarios/count')
   @response(200, {
     description: 'Usuario model count',

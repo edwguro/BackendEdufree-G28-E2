@@ -1,5 +1,9 @@
 import {Entity, model, property} from '@loopback/repository';
 
+class Nota {
+  corte:string;
+  valor:number;
+}
 @model()
 export class UsuarioPorGrupo extends Entity {
   @property({
@@ -14,6 +18,13 @@ export class UsuarioPorGrupo extends Entity {
     required: true,
   })
   usuarioId: string;
+
+  @property({
+    type: 'array',
+    require : true,
+    itemType: 'object',
+  })
+  calificaciones?: Nota[];
 
   @property({
     type: 'string',
