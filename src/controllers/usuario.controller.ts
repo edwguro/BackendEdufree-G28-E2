@@ -1,5 +1,5 @@
-import { authenticate } from '@loopback/authentication';
-import { service } from '@loopback/core';
+import {authenticate} from '@loopback/authentication';
+import {service} from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -22,44 +22,14 @@ import {
 } from '@loopback/rest';
 import {Credenciales, Usuario} from '../models';
 import {UsuarioRepository} from '../repositories';
-import { SeguridadService } from '../services';
+import {SeguridadService} from '../services';
 
+@authenticate('seguridad')
 export class UsuarioController {
   constructor(
     @repository(UsuarioRepository)
-    public usuarioRepository : UsuarioRepository,
-
-    @service(SeguridadService) public servicioSeguridad: SeguridadService
+    public usuarioRepository: UsuarioRepository,
   ) {}
-
-  @post('/login', {
-    responses: {
-      '200': {
-        description: 'ok'
-      }
-    }
-  })
-  async login(@requestBody() credenciales: Credenciales){
-
-    let usuarioEncontrado = await this.servicioSeguridad.validarUsuario(credenciales);
-      
-     if(usuarioEncontrado){
-       const token= await this.servicioSeguridad.GenerarToken(usuarioEncontrado);
-       if(token){
-        return{
-          data: usuarioEncontrado,
-          tk: token
-        }
-       }else{
-        throw new HttpErrors[401]('Datos invalidos');
-       }
-      
-
-     }else{
-          throw new HttpErrors[401]('Datos invalidos');
-     }
-
-  }
 
   @post('/usuarios')
   @response(200, {
@@ -87,9 +57,7 @@ export class UsuarioController {
     description: 'Usuario model count',
     content: {'application/json': {schema: CountSchema}},
   })
-  async count(
-    @param.where(Usuario) where?: Where<Usuario>,
-  ): Promise<Count> {
+  async count(@param.where(Usuario) where?: Where<Usuario>): Promise<Count> {
     return this.usuarioRepository.count(where);
   }
 
@@ -141,7 +109,8 @@ export class UsuarioController {
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Usuario, {exclude: 'where'}) filter?: FilterExcludingWhere<Usuario>
+    @param.filter(Usuario, {exclude: 'where'})
+    filter?: FilterExcludingWhere<Usuario>,
   ): Promise<Usuario> {
     return this.usuarioRepository.findById(id, filter);
   }

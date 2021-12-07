@@ -1,3 +1,4 @@
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {ProgramaAcademico} from '../models';
 import {ProgramaAcademicoRepository} from '../repositories';
 
+@authenticate('seguridad')
 export class ProgramaAcademicoController {
   constructor(
     @repository(ProgramaAcademicoRepository)

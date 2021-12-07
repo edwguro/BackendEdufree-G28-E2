@@ -8,7 +8,7 @@ import { HttpErrors, Request } from "@loopback/rest"
 
 
 export class EstrategiaSeguridad implements AuthenticationStrategy {
-    name: string;
+    name: string = "seguridad";
 
     constructor(
         @service(SeguridadService) public servicioSeguridadService: SeguridadService,
@@ -33,7 +33,7 @@ export class EstrategiaSeguridad implements AuthenticationStrategy {
                     throw new HttpErrors[401]("Token invalido."); 
                 }
         }else{
-            throw new HttpErrors[401]("Solicitud sin token.");
+            throw new HttpErrors[401]("Solicitud sin token actual.");
         }
     }
    

@@ -14,3 +14,4 @@ export * from './perfil.controller';
 export * from './notificaciones.controller';
 export * from './notificaciones-por-usuario.controller';
 export * from './usuario-por-grupo.controller';
+export * from './login.controller';
