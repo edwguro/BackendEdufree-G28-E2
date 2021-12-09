@@ -22,6 +22,12 @@ export class Grupo extends Entity {
   })
   horario: string;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  modalidad: string;
+
   @belongsTo(() => Asignatura)
   asignaturaId: string;
 

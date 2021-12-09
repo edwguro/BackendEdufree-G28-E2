@@ -4,6 +4,7 @@ import {Grupo} from './grupo.model';
 
 @model()
 export class Asignatura extends Entity {
+  
   @property({
     type: 'string',
     id: true,
@@ -13,15 +14,22 @@ export class Asignatura extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    id: true,
+    generated: true,
   })
-  nombre: string;
+  nombre?: string;
 
   @property({
     type: 'number',
     required: true,
   })
   creditos: number;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  tipoPrograma: string;
 
   @property({
     type: 'number',
